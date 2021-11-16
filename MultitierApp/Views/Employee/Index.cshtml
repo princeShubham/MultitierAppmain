@@ -1,0 +1,30 @@
+﻿@model IEnumerable<CommanLayer.models.Employee>
+<a asp-action="Create" class="btn btn-secondary">Create</a>
+<table class="table table-bordered">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Salary</th>
+        <th>Action</th>
+    </tr>
+    @foreach (var em in Model)
+    {
+        <tr>
+            <td>@em.Id</td>
+            <td>@em.Name</td>
+            <td>@em.Email</td>
+            <td>@em.Salary</td>
+            <td><a asp-action="Delete" class="btn btn-danger" asp-route-id="@em.Id" onclick="confirm('Are you sure !')">Delete</a></td>
+
+            <td>@*<a asp-action="Update" class="btn btn-info ml-1" asp-route-id="@em.Id" onclick="confirm('Are you Edit !')">Edit</a>*@
+                <form method="post" asp-action="Update">
+                    <input type="hidden" value="@em.Id" name="id" />
+                    <input type="submit" value="Edit" class="btn btn-info" />
+                </form>
+            
+            </td>
+        </tr>
+    }
+</table>
+@TempData["message"]
